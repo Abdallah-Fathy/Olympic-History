@@ -1,0 +1,47 @@
+select min(year), max(year) 
+from Athlete_Events;
+
+select count(games)
+from Athlete_Events;
+
+select count(medal), season, year
+from Athlete_Events
+group by season, year;
+
+select  round (100 * cast (sum(case when gender = 'M' then 1 else 0 end) as numeric) /  count(gender),2)as Male,
+	    round (100 *  cast (sum(case when gender = 'F' then 1 else 0 end) as numeric) /  count(gender), 2)as Female, 
+		season, 
+		year
+from Athlete_Events
+group by season, year;
+
+select count(gender), gender,medal 
+from Athlete_Events
+where medal <> 'NA'
+group by gender,medal;
+
+select noc_regions.regions ,count(distinct (Athlete_Events.name))
+from noc_regions
+join Athlete_Events on noc_regions.noc = Athlete_Events.noc
+group by (noc_regions.regions)
+order by count desc 
+limit 1
+
+select noc_regions.regions ,count(Athlete_Events.medal)
+from noc_regions
+join Athlete_Events on noc_regions.noc = Athlete_Events.noc
+where medal <> 'NA'
+group by (noc_regions.regions)
+
+select count(distinct (games)),name
+from Athlete_Events
+group by name
+order by count desc
+limit 1 
+
+select name, count(medal)
+from Athlete_Events
+where medal <> 'NA'
+group by name
+order by count desc
+limit 1

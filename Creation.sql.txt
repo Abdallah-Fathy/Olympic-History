@@ -1,0 +1,26 @@
+CREATE TYPE gender AS ENUM ('M', 'F')
+CREATE TYPE season AS ENUM ('Summer', 'Winter')
+CREATE TYPE medal AS ENUM	('Gold', 'Silver', 'Bronze',  'NA')
+create table Athlete_Events (ID Integer ,
+							 Name varchar(250),
+							 Gender gender,
+							 Age  Integer,
+							 Height float,	
+							 Weight float,
+							 Team  varchar (50),
+							 NOC varchar(3),
+ 						   	 Games varchar(50),
+							 Year Integer,
+							 Season season ,
+							 City varchar(50),
+							 Sport varchar(50),
+ 					 		 Event varchar(250),
+ 							 Medal medal );
+							 
+copy Athlete_Events from 'D:\athlete_events.csv'DELIMITER','CSV HEADER null 'NA';		
+
+create table NOC_Regions (NOC varchar(3),
+						  Regions varchar(50),
+						  Notes varchar(250));
+						  
+copy NOC_Regions from 'D:\noc_regions.csv'DELIMITER','CSV HEADER null ' ';	
